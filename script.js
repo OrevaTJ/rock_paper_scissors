@@ -1,49 +1,131 @@
-let scores = document.querySelector('#scores')
-let score = Array.from(document.querySelectorAll('.score'));
-let playerScore = Number(score[0].textContent)
-console.log(playerScore + 1)
-let compScore = Number(score[1].textContent)
-console.log(compScore + 3)
+// Default player/computer score and winner of each set
+let playerScore = 0
+let computerScore = 0
+let setWinner = ''
+let playerChoice = ''
+let computerChoice = ''
 
 
 // Play round compare player choice with computer choice
 function playRound(player, computer) {
-    let message = `You win! ${player} beats ${computer}`
-    if (player === "rock" && computer === "scissors" 
-    || player === "scissors" && computer === "paper"
-    || player === "paper" && computer === "rock"){
+    if (player === "✊" && computer === "✌" 
+    || player === "✌" && computer === "✋"
+    || player === "✋" && computer === "✊"){
+        setWinner = 'player'
         playerScore += 1
-        console.log(message)
+        console.log(`You Won! ${player} beats ${computer}`)
     } else if (player === computer){
-        score = score
+        setWinner = 'tie'
         console.log("A Tie")
     } else {
-        compScore += 1
+        setWinner = 'computer'
+        computerScore += 1
         console.log(`You Lose! ${computer} beats ${player}`)
     }
+
+    updateScore()
 }
 
-// Get computer choice and call playRound with player selection
-function game(e) {
+// Get computer choice and call playRound with player selection, 
+// update score message and selected emoji
+function game(playerSelection) {
     function getComputerChoice() {
-        let list = ["rock", "paper", "scissors" ]
+        let list = ["✊", "✋", "✌" ]
         return (list[Math.floor(Math.random() * list.length)])
     }
     const computerSelection = getComputerChoice();
-    console.log(playRound(e.target.textContent.toLowerCase(), computerSelection))
+    playRound(playerSelection, computerSelection);
+    updateSign(playerSelection, computerSelection);
+    if (playerSelection === '✊') {
+        playerChoice = 'Rock'
+      } else if (playerSelection === '✋') {
+        playerChoice = 'Paper'
+      } else {
+        playerChoice = 'Scissors'
+      }
+    if (computerSelection === '✊') {
+        computerChoice = 'Rock'
+      } else if (computerSelection === '✋') {
+        computerChoice = 'Paper'
+      } else {
+        computerChoice = 'Scissors'
+      }
+    updateMessage(playerChoice, computerChoice);
 }
 
-// Add EventListeners to R/P/S buttons
+// Selectors and Add EventListeners to R/P/S buttons
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
+const playerScoreChange = document.getElementById('playerScore')
+const computerScoreChange = document.getElementById('computerScore')
+const setMessage = document.getElementById('setMessage')
+const scoreMessage = document.getElementById('scoreMessage')
+const playerSign = document.getElementById('playerSign')
+const computerSign = document.getElementById('computerSign')
 
 rock.addEventListener('click', function(e) {
-    game(e)
+    const r = e.target.textContent 
+    game(r);
 })
 paper.addEventListener('click', function(e) {
-    game(e)
+    const p = e.target.textContent 
+    game(p)
 })
 scissors.addEventListener('click', function(e) {
-    game(e)
+    const s = e.target.textContent 
+    game(s)
 })
+
+
+// Function to Updates scores and score info
+function updateScore() {
+    if (setWinner === 'tie') {
+      setMessage.textContent = "It's a Tie!"
+    } else if (setWinner === 'player') {
+      setMessage.textContent = 'You won!'
+    } else if (setWinner === 'computer') {
+      setMessage.textContent = 'You lost!'
+    }
+  
+    playerScoreChange.textContent = `Player: ${playerScore}`
+    computerScoreChange.textContent = `Computer: ${computerScore}`
+  }
+
+// Function to Update score message
+function updateMessage(playerSelection, computerSelection) {
+    if (setWinner === 'tie') {
+        scoreMessage.textContent = `${playerSelection} Tie's ${computerSelection}`
+      } else if (setWinner === 'player') {
+        scoreMessage.textContent = `${playerSelection} Beats ${computerSelection}`
+      } else {
+        scoreMessage.textContent = `${computerSelection} Beats ${playerSelection}`
+      }
+  }
+
+// Function to change signs to selected emojis
+function updateSign(playerSelection, computerSelection) {
+    switch (playerSelection) {
+        case '✊':
+            playerSign.textContent = '✊'
+            break;
+        case '✋':
+            playerSign.textContent = '✋'
+            break;
+        case '✌':
+            playerSign.textContent = '✌'
+            break;
+    }
+
+    switch (computerSelection) {
+        case '✊':
+            computerSign.textContent = '✊'
+            break;
+        case '✋':
+            computerSign.textContent = '✋'
+            break;
+        case '✌':
+            computerSign.textContent = '✌'
+            break;
+    }
+}

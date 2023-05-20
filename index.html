@@ -5,16 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <button class="btn rock">Rock</button>
-        <button class="btn paper">Paper</button>
-        <button class="btn scissors">Scissors</button>
-    </div>
     <div id="scores">
-        <button class="score">0</button>
-        <button class="score">0</button>
+        <h2 id="setMessage">Take your Pick</h2>
+        <h3 id="scoreMessage">A race to First 5</h3>
+        <div class="scoreboard">
+            <div class="playerBoard">
+                <div class="playerSign" id="playerSign">❔</div>
+                <p class="score" id="playerScore">Player: 0</p>
+            </div>
+            <div class="computerBoard">
+                <div class="computerSign" id="computerSign">❔</div>
+                <p class="score" id="computerScore">Computer: 0</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="btn rock">✊</button>
+        <button class="btn paper">✋</button>
+        <button class="btn scissors">✌</button>
     </div>
     
     <script src="script.js"></script>
