@@ -26,9 +26,19 @@ function playRound(player, computer) {
     updateScore()
 }
 
+//Check for first 5. Game over
+function gameOver() {
+    return playerScore === 5 || computerScore === 5
+}
+
+
 // Get computer choice and call playRound with player selection, 
 // update score message and selected emoji
 function game(playerSelection) {
+    if (gameOver()) {
+        endGame()
+        return
+    }
     function getComputerChoice() {
         let list = ["✊", "✋", "✌" ]
         return (list[Math.floor(Math.random() * list.length)])
@@ -51,18 +61,27 @@ function game(playerSelection) {
         computerChoice = 'Scissors'
       }
     updateMessage(playerChoice, computerChoice);
+    if (gameOver()) {
+        endGame()
+        endGameMessage()
+        return
+    }
 }
+
 
 // Selectors and Add EventListeners to R/P/S buttons
 const rock = document.querySelector('.rock');
 const paper = document.querySelector('.paper');
 const scissors = document.querySelector('.scissors');
-const playerScoreChange = document.getElementById('playerScore')
-const computerScoreChange = document.getElementById('computerScore')
-const setMessage = document.getElementById('setMessage')
-const scoreMessage = document.getElementById('scoreMessage')
-const playerSign = document.getElementById('playerSign')
-const computerSign = document.getElementById('computerSign')
+const playerScoreChange = document.getElementById('playerScore');
+const computerScoreChange = document.getElementById('computerScore');
+const setMessage = document.getElementById('setMessage');
+const scoreMessage = document.getElementById('scoreMessage');
+const playerSign = document.getElementById('playerSign');
+const computerSign = document.getElementById('computerSign');
+const gameEndMessage = document.getElementById('endgame-message');
+const restartButton = document.getElementById('restart-btn');
+const endgame = document.getElementById('endgame')
 
 rock.addEventListener('click', function(e) {
     const r = e.target.textContent 
@@ -76,6 +95,7 @@ scissors.addEventListener('click', function(e) {
     const s = e.target.textContent 
     game(s)
 })
+restartButton.addEventListener('click', restartGame)
 
 
 // Function to Updates scores and score info
@@ -128,4 +148,27 @@ function updateSign(playerSelection, computerSelection) {
             computerSign.textContent = '✌'
             break;
     }
+}
+
+function endGame() {
+    endgame.classList.add('active')
+}
+function endGameMessage() {
+    return playerScore > computerScore 
+    ? (gameEndMessage.textContent = 'You Won!')
+    : (gameEndMessage.textContent = 'You Lost!')
+}
+function restartGame() {
+    endgame.classList.remove('active');
+    playerScore = 0;
+    computerScore = 0;
+    setWinner = '';
+    playerChoice = '';
+    computerChoice = '';
+    setMessage.textContent = 'Take your Pick';
+    scoreMessage.textContent = 'A race to First 5';
+    playerSign.textContent = '❔'
+    computerSign.textContent = '❔'
+    playerScoreChange.textContent = 'Player: 0'
+    computerScoreChange.textContent = 'Computer: 0'
 }
