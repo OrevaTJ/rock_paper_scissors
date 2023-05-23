@@ -84,6 +84,7 @@ const restartButton = document.getElementById('restart-btn');
 const endgame = document.getElementById('endgame')
 const face = document.getElementById('face');
 const handShake = document.getElementById('hand-shake')
+document.getElementById('year').innerHTML = new Date().getFullYear()
 
 rock.addEventListener('click', function(e) {
     const r = e.target.textContent 
