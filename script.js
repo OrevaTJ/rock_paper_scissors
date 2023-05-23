@@ -36,7 +36,7 @@ function gameOver() {
 // update score message and selected emoji
 function game(playerSelection) {
     if (gameOver()) {
-        endGame()
+        endGameOpen()
         return
     }
     function getComputerChoice() {
@@ -62,7 +62,7 @@ function game(playerSelection) {
       }
     updateMessage(playerChoice, computerChoice);
     if (gameOver()) {
-        endGame()
+        endGameOpen()
         endGameMessage()
         return
     }
@@ -82,6 +82,8 @@ const computerSign = document.getElementById('computerSign');
 const gameEndMessage = document.getElementById('endgame-message');
 const restartButton = document.getElementById('restart-btn');
 const endgame = document.getElementById('endgame')
+const face = document.getElementById('face');
+const handShake = document.getElementById('hand-shake')
 
 rock.addEventListener('click', function(e) {
     const r = e.target.textContent 
@@ -150,23 +152,39 @@ function updateSign(playerSelection, computerSelection) {
     }
 }
 
-function endGame() {
-    endgame.classList.add('active')
+function endGameOpen() {
+    endgame.style.display = 'block'
 }
+
+function endGameClose() {
+  endgame.style.display = 'none'
+}
+
 function endGameMessage() {
-    return playerScore > computerScore 
-    ? (gameEndMessage.textContent = 'You Won!')
-    : (gameEndMessage.textContent = 'You Lost!')
+  if (playerScore > computerScore) {
+    (gameEndMessage.textContent = 'You Won!')
+    handShake.style.display = 'block'
+  } else {
+    (gameEndMessage.textContent = 'You Lost!')
+    face.style.display = 'block'
+  }
+  return
+    // return playerScore > computerScore 
+    // ? (gameEndMessage.textContent = 'You Won!')
+    // : (gameEndMessage.textContent = 'You Lost!')
 }
+
 function restartGame() {
-    endgame.classList.remove('active');
+    endGameClose();
+    handShake.style.display = 'none'
+    face.style.display = 'none'
     playerScore = 0;
     computerScore = 0;
     setWinner = '';
     playerChoice = '';
     computerChoice = '';
     setMessage.textContent = 'Take your Pick';
-    scoreMessage.textContent = 'A race to First 5';
+    scoreMessage.textContent = 'First to score 5 wins the game';
     playerSign.textContent = '❔'
     computerSign.textContent = '❔'
     playerScoreChange.textContent = 'Player: 0'
