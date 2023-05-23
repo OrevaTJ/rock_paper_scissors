@@ -107,17 +107,9 @@ h3 {
     font-size: 2.3rem;
 }
 
-h4 {
-    font-size: 1.563rem;
-}
-
-h5 {
-    font-size: 1.25rem;
-}
-
 /* container classes */
 .container {
-    /* margin: 0 auto; */
+    margin: 0 auto;
     padding: 15px;
     background-color: rgba(63, 12, 12, 0.3);
     box-shadow: 0 10px 10px rgba(0, 0, 0, .3);
@@ -126,10 +118,6 @@ h5 {
     height: 70vh;
     border-radius: var(--borderRadius);
     text-align: center;
-}
-
-.scores {
-    padding: 20rem 0;
 }
 
 .scoreboard {
@@ -153,7 +141,6 @@ h5 {
     box-shadow: var(--shadow-1);
     transition: var(--transition);
     text-transform: capitalize;
-    display: inline-block;
 }
 .btn:hover{
     box-shadow: 0 0 8px rgba(0, 0, 0, .5);
@@ -187,6 +174,7 @@ h5 {
     margin: 0 auto;
     background: rgb(0 0 0 / 0.9);
     transform: scale(1);
+    border-radius: var(--borderRadius);
 }
 .overlay .btn {
     font-size: 3rem;
@@ -203,4 +191,56 @@ h5 {
 .face,
 .hand-shake {
     display: none;
+}
+
+@media screen and (max-width: 420px) {
+    .container {
+        margin: 0 auto;
+        padding: 8px;
+        width: 80vw;
+        height: 55vh;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+      }
+
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    .scoreboard {
+        font-size: 2rem;
+    }
+
+    .btn {
+        box-shadow: 0 10px 10px rgba(0, 0, 0, .3);
+        padding: 0.375rem 0.75rem;
+    }
+
+    .rock,
+    .paper,
+    .scissors {
+        font-size: 3.8rem;
+    }
+
+    .overlay {
+        top: 25%;
+        left: 10%;
+        right: 10%;
+        height: 50%;
+        width: 80%;
+    }
+    .overlay .btn {
+        font-size: 2rem;
+        width: 14rem;
+    }
+    .overlay p {
+        font-size: 3rem;
+    }
 }

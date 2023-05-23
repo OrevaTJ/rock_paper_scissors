@@ -169,9 +169,6 @@ function endGameMessage() {
     face.style.display = 'block'
   }
   return
-    // return playerScore > computerScore 
-    // ? (gameEndMessage.textContent = 'You Won!')
-    // : (gameEndMessage.textContent = 'You Lost!')
 }
 
 function restartGame() {
